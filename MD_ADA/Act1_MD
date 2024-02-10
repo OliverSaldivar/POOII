@@ -1,0 +1,29 @@
+with open('proposiciones.txt', 'r') as archivo:
+    num_lineas_a_leer = int(archivo.readline().strip())
+    lineas_a_leer = [archivo.readline().strip() for _ in range(num_lineas_a_leer)]
+
+for linea in lineas_a_leer:
+    z = ""
+    x = ""
+    c = 0
+    
+    b = (linea[0].isalpha() or linea[0] == "(" or linea[0] == "~") and (linea[-1].isalpha() or linea[-1] == ")")
+    if b:
+        z = "V"
+    else:
+        z = "F"
+
+    for char in linea:
+        if char == "(": 
+            c += 1
+        elif char == ")": 
+            c -= 1
+        if c < 0: 
+            break
+
+    if c != 0:
+        x = "F"
+    else:
+        x = "V"
+
+    print(z + x)
